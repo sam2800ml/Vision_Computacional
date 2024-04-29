@@ -4,13 +4,16 @@ Es un metodo con el cual se pueden extraer caracteristicas descriptivas de un pu
 scale invariance
 invariante a la escala y a la rotacion, 
 
-SIFT -> Es unu extractor de caracteristicas, 
-1. Se va a ubicar los posibles key  points en el espacio de escala
-2. 
+SIFT -> Es un extractor de caracteristicas, 
+1. Se va a ubicar los posibles key points en el espacio de escala
+2. Se colocan de una manera precisa los keypoints
 3. Se asigna una orientacion para tratar de hacerlo invariante a la rotaciono
 4. Describe los puntos claves a una dimension de alto vector 
 <br>
-Scale space extreme detection
+
+
+# Explicacion de cada componente
+1. Scale space extreme detection
 <br>
 
 la imagen se le hacen distintas escalas para hacerla que no varie, le aplica gaussianos con distintos sigmas, 
@@ -43,4 +46,15 @@ Las ventajas de sift -> se van a encontrar keypoints por imagen por eso es local
 
 ### SURF
 Funciona con un kernel de integracion, 
+
+
+### ORB
+
+### BRISK
+
+### AKAZE
+
+### FREAK 
+
+
 ### Matching caracteristicas
