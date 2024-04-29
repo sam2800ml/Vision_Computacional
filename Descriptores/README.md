@@ -37,22 +37,22 @@ se emparejan los descriptores,
 
 ### SIFT 
 Las ventajas de sift -> se van a encontrar keypoints por imagen por eso es local
-    1. Caracteristicas locales, para cada imagen se realiza el proceso
-    2. Genera gran cantidad de caracteristicas e incluso en imagenes pequeñas
-    3. es muy eficiente
-    4. Puede ser usando en diferentes tipos de caracteristicas
+1. Caracteristicas locales, para cada imagen se realiza el proceso
+2. Genera gran cantidad de caracteristicas e incluso en imagenes pequeñas
+3. es muy eficiente
+ 4. Puede ser usando en diferentes tipos de caracteristicas
 
 
 
-### SURF
+# SURF
 Funciona con un kernel de integracion, 
 
 
-### ORB
+# ORB
 
-### BRISK
+# BRISK
 
-### AKAZE
+# AKAZE
 
 ### FREAK 
 
