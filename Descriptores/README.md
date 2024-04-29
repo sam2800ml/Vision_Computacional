@@ -44,9 +44,30 @@ Las ventajas de sift -> se van a encontrar keypoints por imagen por eso es local
 
 
 
-# SURF
-Funciona con un kernel de integracion, 
+# SURF (/Speeded-Up Robust Features/)
+es un detector de caracteristicas y descriptor, se usa en reconocimiento de objetos, registro de imagenes, classificacion, o reconstruccion 3d, se inspira en el descriptor **SIFT**.
+Usa deteccion por matriz de hesse, esta matriz se llena con la segunda derivada de la imagen.
+![Matriz_Hesse](image.png)
+Donde los valores de Lxx,Lxy,Lyy son esta segunda derivada de la imagen, en una direccion.
+La imagen original se compone del valor aproximado del determinante de matriz de cada pixel.
+![Det](image-1.png)
+El valor de 0.8 es empirico, ya que se requiere el suavizado Gaussiano, este utiliza lo que seria filtros de caja, ya que al obtener las derivadas de ambos lados se puede representar con numeros, lo que hace que sea mas eficiente el calculo.
 
+
+Una de las mayores diferencias con sift, es que antes se escalaban las imagenes a diferentes tamaños, en este caso con surf se escala de diferentes tamaños el filtro
+![alt text](image-2.png)
+
+Despues el posicionamiento de estos puntos caracteristicos, este se hace haciendo una comparacion entre todos los filtros que ya se tienen buscando el maximo o el minimo.
+![alt text](image-3.png)
+Tambien se eliminan aquellos numeros los cuales sean inferiores al umbral, lo que reduce la cantidad de caracteristicas.
+
+Para determinar la direccion de estos puntos, no se toma el histograma de gradiente, el punto caracteristico como centro se calcula el radio de 6s, esta s es el valor de la escala del punto caracteristico, y se suma la respuesta de los puntos en ese sector en ambas direcciones, la respuesta cercana a el punto tiene mas valor que las que estan alejadas.
+![Direccion](image-4.png)
+
+Se toma un marco cuadrado alrededor del punto, este se divide en 16 regiones, estas regiones cuentan las caracteristicas de las ondas haar de 25 pixeles en las direcciones horizontales y verticales.
+![descriptor](image-5.png)
+
+por lo que cada area tiene 4 valores, por lo que se habla de que tiene un vector de 64D, que es la mitad del SIFT.
 
 # ORB
 
@@ -54,7 +75,7 @@ Funciona con un kernel de integracion,
 
 # AKAZE
 
-### FREAK 
+# FREAK 
 
 
-### Matching caracteristicas
+
