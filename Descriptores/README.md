@@ -130,7 +130,7 @@ Cuando 𝑅 es grande, la región es una esquina.
 5. se compara las intensidades de algunos pixeles del circulo, donde se requiere que al menos 3 cumplan con el umbral establecido, si al menos 3 de los pixeles no esta dentro del rango, se denomina el punto como no de interes, por lo que se descartaria.
 6. se repite el proceso para cada pixel
 
-
+![Fast](image-12.png)
 
 
 
