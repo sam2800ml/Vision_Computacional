@@ -44,7 +44,7 @@ Las ventajas de sift -> se van a encontrar keypoints por imagen por eso es local
 
 
 
-# SURF (/Speeded-Up Robust Features/)
+# SURF (Speeded-Up Robust Features)
 es un detector de caracteristicas y descriptor, se usa en reconocimiento de objetos, registro de imagenes, classificacion, o reconstruccion 3d, se inspira en el descriptor **SIFT**.
 Usa deteccion por matriz de hesse, esta matriz se llena con la segunda derivada de la imagen.
 <br>
@@ -75,13 +75,62 @@ Se toma un marco cuadrado alrededor del punto, este se divide en 16 regiones, es
 
 por lo que cada area tiene 4 valores, por lo que se habla de que tiene un vector de 64D, que es la mitad del SIFT.
 
-# ORB
+# ORB (Oriented Fast and Rotated BRIEF)
+Es un detector de caracteristicas, es eficiente y bajo de memoria
+Utiliza primeramente un detector FAST para poder hacer la seleccion de las caracteristicas.
+La forma como funciona FAST, es que se da un punto central denominado p, este valor se compara en intensidad en un circulo de 16 pixeles, despues estos pixeles estar organizados en 3 clases, dependiendo a las escalas con relacion a p, si mas de 8 pixeles son mas oscuros, o mas claros que p, se elige como keypoint.
+Pero este no tiene un componente de orientacion o de caracteristicas multiescalas, por lo que usa un algoritmo de multiescala piramidal, son la misma imagen pero a diferentes resoluciones.
+Una vez completado la piramide se usa FAST para calcular los keypoints atravez de diferentes escalas y asi sea invariante a la escala.
+<br>
+![Piramide](image-6.png)
 
-# BRISK
+Una vez localizado los keypoints, falta poder calcular la orientacion de estos, utiliza las intensidades de los centroides para poder calcular la direccion que va a tener.
+El momento es calcula con los valores de x, y por las intensidades de estos.
+<br>
+![alt text](image-7.png)
+<br>
+Una vez calculado los momentos se puede encontrar los centroides, que son la relacion de la diferencia de estos
+![alt text](image-8.png)
+<br>
+Y los angulos son calculados usando las esquinas de los centroides.
+<br>
+![alt text](image-9.png)
 
-# AKAZE
+Despues se usa brief( Binary robust independent elementary feature).
+tomas todos los puntos de el algoritmo de FAST y los convierte a unos vectores de caracteristicas binarias, empieza usando un kernel gaussiano para prevenir que el descriptor sea sensible a ruidos de alta frecuencia.
+despues con los keypoints obtenidos se van a seleccionar un par random de pixeles al rededor, a este espacio se le denomina patch, el primer pixel se saca de de una distribucion gaussiana de al rededor del centro del punto, y el segundo se saca de la distribucion del pixel obtenido.
+Si el primer pixel es mas intenso que el segundo se le asigna un valor de uno, si no se le asigna un 0, esto se hace durante 128 veces por keypoint
 
-# FREAK 
+# HARRIS CORNER 
+Una esquina es un punto donde el gradiente del contraste es maximo en una dirección y mínimo en otra.
+En el momento que se mira la parte plana, y se mira un gradiente de este se observa que es constante por lo que no hay cambios y no se detecta nada, la esquina hay un un cambio pero no lo suficiente, en cambio cunado se compara con el borde, si hay un cambio mayot, en todas las direcciones.
+![Corner](image-10.png)
+<br>
+
+Se empieza mirando una pequeña ventana alrededor de un pixel en la imagen, queremos identificar los pixeles unicos, por lo que miramos la diferencia de los valores en los pixeles.
+se calcula la diferencia sumada al cuadrado (SSD) de los valores de píxeles antes y después de desplazar la ventana. Este SSD se calcula para desplazamientos en todas las ocho direcciones (por ejemplo, arriba, abajo, izquierda, derecha y diagonales).
+Los píxeles con valores grandes de E(u,v) se consideran características en la imagen. Estos son típicamente esquinas u otras estructuras distintivas. Se puede aplicar un umbral para determinar qué píxeles se consideran características en función de la magnitud de E(u,v).
+El objetivo de la detección de esquinas es maximizar la función E(u,v). Esto implica maximizar el segundo término de la ecuación proporcionada.
+Aplicando técnicas matemáticas como la expansión de Taylor y resolviendo los eigenvectores de la matriz sumada M, se obtienen las direcciones para los mayores y menores incrementos en SSD. Los eigenvalores correspondientes dan la cantidad real de estos incrementos.
+
+Se calcula un puntaje 𝑅 para cada ventana utilizando los eigenvalores 𝜆1 y 𝜆2 de 𝑀.
+
+Cuando ∣𝑅∣ es pequeño, la región es plana.
+Cuando 𝑅 < 0, la región es un borde.
+Cuando 𝑅 es grande, la región es una esquina.
+<br>
+![corner_detection](image-11.png)
+<br>
+
+# FAST (Features from Accelerated Segment Test)
+1. Se selecciona un pixel de la imagen
+2. se calcula un threshold
+3. Se considera un círculo de 16 píxeles alrededor del píxel bajo prueba. Este círculo se construye utilizando el algoritmo de Bresenham para un círculo de radio 3.
+4. se determina si el pixel es una esquina si existe un conjunto de pixeles contiguo que sea mas brillantes o mas oscuros
+5. se compara las intensidades de algunos pixeles del circulo, donde se requiere que al menos 3 cumplan con el umbral establecido, si al menos 3 de los pixeles no esta dentro del rango, se denomina el punto como no de interes, por lo que se descartaria.
+6. se repite el proceso para cada pixel
+
+
 
 
 
