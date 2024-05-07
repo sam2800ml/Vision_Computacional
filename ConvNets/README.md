@@ -16,6 +16,7 @@ Como se observa tambien en la imagen anterior tenemos que con el uso del filtro 
 Con la imagen anterior al aplicar el filtro 3x3 no se va a perder la dimensionalidad de la imagen.
 >
 Al igual que como se observa en la imagen el filtro pasa pixel por pixel, hacia la derecha, por lo que esto se conoce como seria **stride**, esto determina la cantidad de pasos que dara.
+>
 ![Stride](image-3.png)
 >
 En la imagen anterior se puede observar una imagen con stride=2 por lo que la dimensionalidad de la imagen se vera mas reducida.
@@ -35,6 +36,7 @@ Nuestra capa de convolucion que es toda la parte de filtros que realizamos, desp
 En la siguiente imagen se puede ver como se conectan todas las neurona en un feed forward para el entrenamiento de nuestra red, donde la primera neurona se conecta con todas las siguientes, teniendo informacion de todas las anteiores.
 
 feed forward
+>
 ![Feed-forward](image.png)
 
 >
